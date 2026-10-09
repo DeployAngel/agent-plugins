@@ -1,0 +1,20 @@
+{
+  "name": "deployangel",
+  "interface": {
+    "displayName": "DeployAngel"
+  },
+  "plugins": [
+    {
+      "name": "deployangel",
+      "source": {
+        "source": "local",
+        "path": "./plugins/deployangel"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

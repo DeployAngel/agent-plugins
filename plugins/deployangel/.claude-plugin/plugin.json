@@ -1,0 +1,22 @@
+{
+  "name": "deployangel",
+  "displayName": "DeployAngel",
+  "version": "0.1.0",
+  "description": "Wait for DeployAngel's production verdict after each deploy, and read why a release failed. For Rails, Django, FastAPI, and Flask apps running the DeployAngel agent.",
+  "author": {
+    "name": "DeployAngel",
+    "email": "support@deployangel.com",
+    "url": "https://www.deployangel.com"
+  },
+  "homepage": "https://www.deployangel.com/docs#verdicts",
+  "repository": "https://github.com/DeployAngel/agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "deployment",
+    "verification",
+    "production",
+    "rails",
+    "django",
+    "mcp"
+  ]
+}

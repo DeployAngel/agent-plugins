@@ -1,0 +1,13 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "deployangel": {
+      "type": "stdio",
+      "command": "sh",
+      "args": [
+        "-c",
+        "if [ -f Gemfile.lock ] && grep -q \"^    deployangel \" Gemfile.lock; then exec bundle exec deployangel mcp; elif [ -f uv.lock ]; then exec uv run deployangel mcp; elif [ -f poetry.lock ]; then exec poetry run deployangel mcp; else exec deployangel mcp; fi"
+      ]
+    }
+  }
+}

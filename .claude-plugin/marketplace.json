@@ -1,0 +1,15 @@
+{
+  "name": "deployangel",
+  "owner": {
+    "name": "DeployAngel",
+    "email": "support@deployangel.com"
+  },
+  "description": "DeployAngel's plugins for coding agents.",
+  "plugins": [
+    {
+      "name": "deployangel",
+      "source": "./plugins/deployangel",
+      "description": "Wait for DeployAngel's production verdict after each deploy, and read why a release failed. For Rails, Django, FastAPI, and Flask apps running the DeployAngel agent."
+    }
+  ]
+}
