@@ -50,8 +50,18 @@ Use the commit that was deployed (usually `git rev-parse HEAD` after pushing).
 ## A release that isn't cleared yet
 
 Call `get_exercise_plan` (or run `deployangel plan`). If its status is
-"exercisable" or "waiting_for_activity", say what it lists and offer to
-exercise it against production: read-only routes freely, routes marked as
-changing data only with a test account or after asking. Report what you ran
-with the `report_with` command it gives. If the status is "warm_up", nothing
-run can clear it: a new app's first day can't clear releases.
+"exercisable" or "waiting_for_activity", run the project's CLI with
+`exercise --url=<production URL>` (gem 0.1.20 or Python package 0.1.8 and
+later), for example:
+
+```bash
+bundle exec deployangel exercise --url=https://example.com
+```
+
+It sends the plan's read-only requests from here and records them on the
+release, which lists them as exercised from your side. Ask for the
+production URL if you don't know it. Offer to exercise what it skips: routes
+that change data only with a test account or after asking, and routes that
+need a path parameter with a real ID. Then wait for the verdict again. If
+the status is "warm_up", nothing run can clear it: a new app's first day
+can't clear releases.
