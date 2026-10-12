@@ -47,6 +47,10 @@ Use the commit that was deployed (usually `git rev-parse HEAD` after pushing).
   DEPLOYANGEL_API_TOKEN is missing or wrong: ask for a "CLI & coding agents"
   token from the app's Settings in DeployAngel, set in the environment, never
   written into a file in the repository.
+- Confidence `medium` clears a release just as `high` does (high also needs 80%
+  coverage and a full baseline), so don't call a medium clearance weak.
+  Warnings (`suspicious: true`) aren't failures: report them as "watching
+  closely:" and the `watching_closely` items, never as "suspicious".
 
 ## A release that isn't cleared yet
 
