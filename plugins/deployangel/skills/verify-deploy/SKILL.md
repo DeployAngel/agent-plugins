@@ -1,6 +1,6 @@
 ---
 name: verify-deploy
-description: Wait for DeployAngel's production verdict on a release and act on it. Use after deploying, or after pushing a commit that deploys, in an app that runs the DeployAngel agent (the deployangel gem or Python package), and when asked whether a release is safe, cleared, or why it failed.
+description: Wait for DeployAngel's production verdict on a release and act on it. Use after deploying, or after pushing a commit that deploys, in an app that runs the DeployAngel agent (the deployangel gem, Python package, or .NET package), and when asked whether a release is safe, cleared, or why it failed.
 ---
 
 # Verify a deploy with DeployAngel
@@ -20,8 +20,9 @@ Use the commit that was deployed (usually `git rev-parse HEAD` after pushing).
   registered, and the call waits for that too.
 - Without it, run the project's own CLI with the same options:
   `bundle exec deployangel` in a Rails app, `uv run deployangel` or
-  `poetry run deployangel` in a Python app that uses them, otherwise
-  `deployangel`:
+  `poetry run deployangel` in a Python app that uses them, `dotnet deployangel`
+  in a .NET app whose `.config/dotnet-tools.json` lists `DeployAngel.Tool`,
+  otherwise `deployangel`:
 
   ```bash
   bundle exec deployangel verify --commit=<sha> --wait --until=initial
@@ -57,7 +58,7 @@ Use the commit that was deployed (usually `git rev-parse HEAD` after pushing).
 Call `get_exercise_plan` (or run `deployangel plan`). If its status is
 "exercisable" or "waiting_for_activity", run the project's CLI with
 `exercise --url=<production URL>` (gem 0.1.20 or Python package 0.1.8 and
-later), for example:
+later, or any version of the .NET tool), for example:
 
 ```bash
 bundle exec deployangel exercise --url=https://example.com

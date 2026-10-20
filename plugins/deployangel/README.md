@@ -16,11 +16,15 @@ It contains:
 
 ## Requirements
 
-- An app that runs the DeployAngel agent: the `deployangel` gem (Rails) or
-  the `deployangel` Python package (Django, FastAPI, Flask). The MCP server is
-  that package's own `deployangel mcp` command, run with `bundle exec` in a
+- An app that runs the DeployAngel agent: the `deployangel` gem (Rails), the
+  `deployangel` Python package (Django, FastAPI, Flask), or the `DeployAngel`
+  NuGet package (ASP.NET Core, worker services, Hangfire). The MCP server is
+  that agent's own `deployangel mcp` command, run with `bundle exec` in a
   Rails app, with `uv run` or `poetry run` in a Python app that uses them, and
-  from your `PATH` otherwise.
+  from your `PATH` otherwise. In a .NET app, it comes from the
+  `DeployAngel.Tool` .NET tool: run with `dotnet` when the repository installs
+  it as a local tool (`.config/dotnet-tools.json`), and from your `PATH` when
+  it's installed with `dotnet tool install --global DeployAngel.Tool`.
 - `DEPLOYANGEL_API_TOKEN` in the environment your agent runs in: a "CLI &
   coding agents" token from the app's Settings in DeployAngel. It's read-only.
   Keep it out of the repository, for example in an `.envrc` with direnv.
@@ -32,6 +36,7 @@ The plugin has no settings of its own. Set `DEPLOYANGEL_URL` only if you run
 against a DeployAngel server other than `https://api.deployangel.com`.
 
 To set up a single project without the plugin, run
-`bundle exec deployangel install agents` (or `deployangel install agents`).
+`bundle exec deployangel install agents` (or `deployangel install agents`, or
+`dotnet deployangel install agents` with a local .NET tool).
 It writes the same MCP server into the project's Claude Code, Cursor, and Codex
 config, and adds the instructions to `AGENTS.md`.

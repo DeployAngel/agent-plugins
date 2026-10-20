@@ -1,9 +1,9 @@
 # DeployAngel plugins for coding agents
 
 [DeployAngel](https://www.deployangel.com) verifies every production deploy
-of a Rails, Django, FastAPI, or Flask app: it compares real traffic after the
-deploy with the last healthy release, then clears the release, fails it, or
-says what it's still waiting to see.
+of a Rails, Django, FastAPI, Flask, or ASP.NET Core app: it compares real
+traffic after the deploy with the last healthy release, then clears the
+release, fails it, or says what it's still waiting to see.
 
 The `deployangel` plugin lets Claude Code, Cursor, and Codex wait for that
 verdict after they deploy, and read the evidence when a release fails. See
@@ -42,7 +42,8 @@ Install DeployAngel from the Cursor Marketplace.
 
 ```bash
 bundle exec deployangel install agents    # Rails
-deployangel install agents                # Python
+deployangel install agents                # Python, or .NET as a global tool
+dotnet deployangel install agents         # .NET as a local tool
 ```
 
 ## Every agent needs a token

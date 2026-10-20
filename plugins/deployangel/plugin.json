@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "deployangel",
-  "version": "0.1.0",
-  "description": "Wait for DeployAngel's production verdict after each deploy, and read why a release failed. For Rails, Django, FastAPI, and Flask apps running the DeployAngel agent.",
+  "version": "0.2.0",
+  "description": "Wait for DeployAngel's production verdict after each deploy, and read why a release failed. For Rails, Django, FastAPI, Flask, and ASP.NET Core apps running the DeployAngel agent.",
   "author": {
     "name": "DeployAngel",
     "email": "support@deployangel.com",
@@ -17,6 +17,7 @@
     "production",
     "rails",
     "django",
+    "dotnet",
     "mcp"
   ]
 }
