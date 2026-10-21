@@ -1,6 +1,6 @@
 ---
 name: verify-deploy
-description: Wait for DeployAngel's production verdict on a release and act on it. Use after deploying, or after pushing a commit that deploys, in an app that runs the DeployAngel agent (the deployangel gem, Python package, or .NET package), and when asked whether a release is safe, cleared, or why it failed.
+description: Wait for DeployAngel's production verdict on a release and act on it. Use after deploying, or after pushing a commit that deploys, in an app that runs the DeployAngel agent (the deployangel gem, Python package, or .NET package); when asked whether a release is safe, cleared, why it failed, or whether a fix worked; and at the start of a session in such an app, to pick up production problems left from earlier sessions.
 ---
 
 # Verify a deploy with DeployAngel
@@ -9,6 +9,15 @@ DeployAngel compares production traffic after a deploy with the last healthy
 release and gives the release a verdict: cleared, failed, or not cleared yet.
 Never call a release done because CI passed or the deploy finished; wait for
 the verdict.
+
+## At the start of a session
+
+Releases keep being verified after a session ends: a nightly job runs, a
+rarely used page fails, a release isn't cleared until the next morning.
+Before changing code, call `list_deployments` and `list_late_regressions`
+(or run the project's CLI with `status`). If a recent release failed, isn't
+cleared yet, or has a late regression, tell the user before starting other
+work, with the release and what DeployAngel found.
 
 ## Wait for the verdict
 
@@ -52,6 +61,27 @@ Use the commit that was deployed (usually `git rev-parse HEAD` after pushing).
   coverage and a full baseline), so don't call a medium clearance weak.
   Warnings (`suspicious: true`) aren't failures: report them as "watching
   closely:" and the `watching_closely` items, never as "suspicious".
+
+## After deploying a fix
+
+A failed release stays failed, so a fix is confirmed by the release that
+follows it. Its verdict's `fix_check` (in `get_verification` and
+`wait_for_verification`, or the CLI's `--format=json`) lists each problem
+from the failed releases and late regressions before it, looked up in the
+new release's own evidence:
+
+- `fixed`: the release cleared and every earlier problem is healthy again.
+  Say so, with the statement.
+- `healthy_so_far`: every problem looks healthy, but the release isn't
+  cleared yet. Keep waiting for the verdict.
+- `still_failing`: a problem is failing again, or happening again in the new
+  release's telemetry (`seen_again`). The fix didn't work: investigate it
+  like a failure.
+- `partly_confirmed` or `not_confirmed`: some problems haven't run since the
+  fix (`not_run`) or have too little traffic to judge. Report which ones, and
+  use the exercise plan below if they're routes it can run.
+
+`fix_check` is absent when nothing before the release failed.
 
 ## A release that isn't cleared yet
 
