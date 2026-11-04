@@ -1,6 +1,6 @@
 {
   "name": "deployangel",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Wait for DeployAngel's production verdict after each deploy, and read why a release failed. For Rails, Django, FastAPI, Flask, and ASP.NET Core apps running the DeployAngel agent.",
   "author": {
     "name": "DeployAngel",
