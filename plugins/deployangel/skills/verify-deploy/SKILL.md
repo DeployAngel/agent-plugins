@@ -62,6 +62,25 @@ Use the commit that was deployed (usually `git rev-parse HEAD` after pushing).
   Warnings (`suspicious: true`) aren't failures: report them as "watching
   closely:" and the `watching_closely` items, never as "suspicious".
 
+## A failure that may have been intended
+
+A release can fail on a change made on purpose: a `volume_drop` finding (a
+route or job class that runs far less) or a `checkpoint_rate` finding (a
+business event that dropped), after you removed that route, job, or event.
+Such a finding carries an `accept_url`.
+
+You can't accept it, and must not try or look for a way to: a person decides.
+Tell the user which finding failed, why you think the change was intended
+(the diff that removed it, for example), and give them the `accept_url`.
+Until someone accepts it, the release is failed: never report it as a
+success, and if you're not sure it was intended, investigate it like any
+other failure.
+
+A finding with status `accepted` was accepted as intended by the person in
+`accepted_as_intended`, with their reason. Mention it with the verdict. If it
+was the release's only failure, the release is being verified again, so wait
+for the new verdict.
+
 ## After deploying a fix
 
 A failed release stays failed, so a fix is confirmed by the release that
